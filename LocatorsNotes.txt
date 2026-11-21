@@ -1,0 +1,24 @@
+1. When we want to select a drop down based on index:
+    page.selectOption('select#coachSelect', { index: 1 }')
+
+2. If there is a input value to print then 
+    console.log('End date:' + await page.locator('#endDateInput').inputValue());
+   Else there is text only present and we need to print
+    console.log('End date:' + await page.locator('#endDateInput').textContent());
+
+3. 'pressSequentially' - Used to enter char by char
+4. 'fill' - Used to enter complete input once
+
+5. For accepting GeoLocation confirmation - Add below step in playwright.config.js file 
+export default defineConfig({
+  use: {
+    // Grant permission AND provide a mock location
+    permissions: ['geolocation'],
+    geolocation: { latitude: 17.4483, longitude: 78.3915 }, 
+  },
+});
+
+6. If there is something related to network related issue found to load or to get page stable with all the 
+    URL's we need to use
+        await Promise.all([
+        page.waitForURL(/\/payment_options\//),])
